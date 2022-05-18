@@ -25,24 +25,20 @@ __figure 1. Firewall semantics__
 
 Default policy: It is very difficult to explicitly cover every possible rule on the firewall. For this reason, the firewall must always have a default policy. Default policy only consists of action (accept, reject or drop).Suppose no rule is defined about SSH connection to the server on the firewall. So, it will follow the default policy. If default policy on the firewall is set to accept, then any computer outside of your office can establish an SSH connection to the server. Therefore, setting default policy as drop (or reject) is always a good practice.</p>
 
-## 3. Firewalls: Basic Approaches
-<p>Firewall technology can be used to protect networks, by installing it strategically at a single security screen station where the private network or the Intranet connects to the public Internet, making it easier to ensure security, audit and monitor traffic, and trace break-in attempts. It can also be used to isolate sub-networks and to provide additional layers of security (defense-in-depth) within the organization. There are three basic approaches or services that a firewall uses to protect a network: packet filtering, circuit proxy, and application proxy [6, 11].</p>
+## 3. Types of Firewalls
+<p>Firewalls are also categorized based on how they operate, and each type can be set up either as software or a physical device. Based on their method of operation, there are four different types of firewalls.</p>
 
 ### 3.1 Packet filtering:
 <p>A firewall can be used as a pocket filter. It can forward or block packets based on the information in the network-layer and transport-layer headers: source and destination IP address, source and destination port address and type of protocol(TCP or UDP). A packet-filter firewall is a router that uses a filtering table to decide which packet must be discarded.It analyses traffic at the transport protocol layer (but mainly uses first 3 layers).Packet firewalls treat each packet in isolation. They have no ability to tell whether a packet is part of an existing stream of traffic. </p>
 
-### 3.2 Circuit proxy
-<p>The second approach is the use of what is called a circuit proxy. The main difference between the circuit proxy and the packet filtering firewall is that the former is the addressee to which all communicators must address their packets. Assuming access has been granted, the circuit proxy replaces the original address with the address of the intended destination. It has the disadvantage of laying claim to the processing resources required to make changes</p>
+### 3.2 Circuit-Level Gateways
+<p>The second approach is the use of what is called a circuit proxy. The main difference between the circuit proxy and the packet filtering firewall is that the former is the addressee to which all communicators must address their packets. Assuming access has been granted, the circuit proxy replaces the original address with the address of the intended destination. However, their inability to inspect the content of data packets makes them an incomplete security solution on their own. A data packet containing malware can bypass a circuit-level gateway easily if it has a legitimate TCP handshake. That is why another type of firewall is often configured on top of circuit-level gateways for added protection.</p>
 
-### 3.3 Application proxy
-<p>An application proxy is more complicated in operation than a packet filtering firewall or a circuit proxy. The application proxy understands the application protocol, and data and intercepts any information intended for that application. Based on the amount of information available to make decisions, the application proxy can authenticate users and judge whether any of the data could pose a threat. The price to be paid for this more comprehensive function is that users or clients often have to be reconfigured to them, sometimes a complicated process, with a consequent loss of
-transparency. Application proxies are referred to as proxy services, and the host machines running them as application gateways.</p>
+### 3.3 Application-Level gateways (Proxy Firewalls)
+<p>Proxy firewalls, are implemented at the application layer via a proxy device. Instead of an outsider accessing your internal network directly, the connection is established through the proxy firewall. The external client sends a request to the proxy firewall. After verifying the authenticity of the request, the proxy firewall forwards it to one of the internal devices or servers on the client’s behalf. Alternatively, an internal device may request access to a webpage, and the proxy device will forward the request while hiding the identity and location of the internal devices and network.Unlike packet filtering firewalls, proxy firewalls perform stateful and deep packet inspection to analyze the context and content of data packets against a set of user-defined rules. Based on the outcome, they either permit or discard a packet. They protect the identity and location of your sensitive resources by preventing a direct connection between internal systems and external networks. </p>
 
 ### 3.4 Packet instruction approach
-<p>This approach, in contrast to the technologies so far described, involves inspecting the contents of packets as well as their headers. An inspection firewall carries out its inspection by using an inspection module, which understands, and can therefore inspect, data destined for all layers (from the network layer to the application layer). It carries out its inspection by integrating all information gathered from all layers into a single inspection point, and then examining it. A state-full inspection firewall registers the state of any connection it is handling and acts on this information.</p>
-<p>Inspection firewalls can provide address translation and hiding, virus scanning, Web
-site filtering, screening for keywords(typically in e-mail), and context-sensitive
-security for complex applications.</p>
+<p>A step ahead of circuit-level gateways, stateful inspection firewalls, and verifying and keeping track of established connections also perform packet inspection to provide better, more comprehensive security. They work by creating a state table with source IP, destination IP, source port, and destination port once a connection is established. They create their own rules dynamically to allow expected incoming network traffic instead of relying on a hardcoded set of rules based on this information. They conveniently drop data packets that do not belong to a verified active connection.</p>
 
 
 ## 4. Firewall: limitations
@@ -61,6 +57,8 @@ configurable access control and authentication mechanisms with their traditional
 
 ## 6. References
 1. https://en.wikipedia.org/wiki/Firewall_(computing)
-2. https://www.javatpoint.com/firewall
-3. https://www.techtarget.com/searchsecurity/feature/The-five-different-types-of-firewalls
-4. https://www.geeksforgeeks.org/introduction-of-firewall-in-computer-network/
+2. https://www.simplilearn.com/tutorials/cyber-security-tutorial/what-is-firewall
+3. https://www.javatpoint.com/firewall
+4. https://www.techtarget.com/searchsecurity/feature/The-five-different-types-of-firewalls
+5. https://www.geeksforgeeks.org/introduction-of-firewall-in-computer-network/
+6. https://www.parallels.com/blogs/ras/types-of-firewalls/
